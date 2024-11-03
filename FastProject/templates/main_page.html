@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+    GameBlog
+{% endblock %}
+
+{% block body %}
+    {% if posts|length == 0 %}
+        <div class="container mt-5">
+            <h1>Пока статей нет ¯\_(ツ)_/¯</h1>
+        </div>
+    {% else %}
+    <div class="container mt-5">
+        {% if profile %}
+            <h1>Все посты {{ user.username }}</h1>
+        {% else %}
+            <h1>Все посты на сайте</h1>
+        {% endif %}
+        {% for el in posts %}
+        <div class="alert alert-info">
+            <h2>{{ el.title }}</h2>
+            <p>{{ el.intro }}</b></p>
+            <p><b>Дата создания статьи: {{ el.date.date() }}</b></p>
+            <a href="/post/{{ el.id }}" class="btn btn-warning">Перейти к статье</a>
+
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
